@@ -1,0 +1,30 @@
+version: '3'
+services:
+  ############### Application containers ###############
+
+  apollo_security_example_graphql_server:
+    image: apollo_security_example_graphql_server
+    build: 
+      context: ./graphql 
+      dockerfile: Dockerfile
+    expose:
+      - 80
+    ports:
+      - 81:80
+    environment:
+      - PORT=80
+    volumes:
+      - ./graphql/src:/usr/src/app/src
+    networks:
+      apollo-security-example:
+        aliases:
+          - graphql_server
+  
+  ############### End ###############
+
+  ############### End ###############
+
+networks:
+  apollo-security-example:
+    external:
+      name: apollo-security-example
